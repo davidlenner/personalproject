@@ -1,4 +1,4 @@
-package com.lenner.personalprojectwithapis.init;
+package com.lenner.personalprojectwithapis.service;
 
 import org.springframework.stereotype.Component;
 

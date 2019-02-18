@@ -1,7 +1,5 @@
 package com.lenner.personalprojectwithapis.models;
 
-import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
 
 @Entity
@@ -18,19 +16,6 @@ public class Picture {
     private String serviceVersion;
     private String title;
     private String url;
-
-    public Picture() {
-    }
-
-    public Picture(@Nullable String date, @Nullable String explanation, @Nullable String hdurl, @Nullable String mediaType, @Nullable String serviceVersion, @Nullable String title, @Nullable String url) {
-        this.date = date;
-        this.explanation = explanation;
-        this.hdurl = hdurl;
-        this.mediaType = mediaType;
-        this.serviceVersion = serviceVersion;
-        this.title = title;
-        this.url = url;
-    }
 
     public Long getId() {
         return id;

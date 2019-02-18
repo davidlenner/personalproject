@@ -13,7 +13,7 @@ public class PersonalProjectService {
     PictureRepo pictureRepo;
 
     public Picture getPicture(){
-        return pictureRepo.findAll().get(1);
+        return pictureRepo.findAll().get(0);
     }
 
 }

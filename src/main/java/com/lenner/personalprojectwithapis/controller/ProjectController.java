@@ -14,7 +14,7 @@ public class ProjectController {
 
     @GetMapping("/")
     public String index(Model model){
-        model.addAttribute("url",personalProjectService.getPicture().getHdurl());
+        model.addAttribute("url",personalProjectService.getPicture().getUrl());
         model.addAttribute("title",personalProjectService.getPicture().getTitle());
         return "index";
 

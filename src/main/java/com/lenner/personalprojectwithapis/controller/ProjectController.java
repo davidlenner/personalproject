@@ -1,24 +1,28 @@
 package com.lenner.personalprojectwithapis.controller;
 
 import com.lenner.personalprojectwithapis.service.PersonalProjectService;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@CrossOrigin
+@RestController
 public class ProjectController {
 
     @Autowired
     PersonalProjectService personalProjectService;
 
-    @GetMapping("/")
-    public String index(Model model){
-        model.addAttribute("url",personalProjectService.getPicture().getUrl());
-        model.addAttribute("title",personalProjectService.getPicture().getTitle());
-        return "index";
+    @GetMapping("/pic")
+    public String index() throws JSONException {
 
+        JSONObject obj = new JSONObject();
+        obj.put("url",personalProjectService.getPicture().getUrl());
+        obj.put("title",personalProjectService.getPicture().getTitle());
+        return obj.toString();
     }
 
-
 }
+

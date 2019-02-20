@@ -13,12 +13,12 @@ public class DBInitializer {
 
     private RestTemplateBuilder builder = new RestTemplateBuilder();
 
-    public DBInitializer(PictureRepo pictureRepo){
+    public DBInitializer(PictureRepo pictureRepo) {
 
         RestTemplate restTemplate = builder.build();
 
         ResponseEntity<Picture> pictureResponseEntity = restTemplate.getForEntity
-                ("https://api.nasa.gov/planetary/apod?api_key=icf7sVa7sxW26v4j6f0rWVuFyJv6pJMyyd6QMVEk",Picture.class);
+                ("https://api.nasa.gov/planetary/apod?api_key=icf7sVa7sxW26v4j6f0rWVuFyJv6pJMyyd6QMVEk", Picture.class);
         pictureRepo.save(pictureResponseEntity.getBody());
     }
 }

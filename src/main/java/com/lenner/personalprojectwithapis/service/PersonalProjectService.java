@@ -11,7 +11,7 @@ public class PersonalProjectService {
     @Autowired
     PictureRepo pictureRepo;
 
-    public Picture getPicture(){
+    public Picture getPicture() {
         return pictureRepo.findAll().get(0);
     }
 

@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {PictureData} from "../models/PictureData";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-mainpage',
@@ -10,13 +8,12 @@ import {Observable} from "rxjs";
 })
 export class MainpageComponent implements OnInit {
 
-  title = 'angulartest';
-  public picturedata : Object;
+  public Data : Object;
 
   constructor(private http:HttpClient) {}
 
   ngOnInit() {
-    this.getPics().subscribe(data => this.picturedata = data);
+    this.getPics().subscribe(data => this.Data = data);
   }
 
   getPics() {

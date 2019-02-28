@@ -19,7 +19,7 @@ public class ProjectController {
     public String index() throws JSONException {
 
         JSONObject obj = new JSONObject();
-        obj.put("url",personalProjectService.getPicture().getUrl());
+        obj.put("picture",personalProjectService.getPicture().getUrl());
         obj.put("title",personalProjectService.getPicture().getTitle());
         return obj.toString();
     }

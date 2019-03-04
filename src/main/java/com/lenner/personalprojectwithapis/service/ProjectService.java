@@ -7,6 +7,8 @@ import com.lenner.personalprojectwithapis.repository.PictureRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProjectService {
 
@@ -20,8 +22,8 @@ public class ProjectService {
         return pictureRepo.findAll().get(0);
     }
 
-    public Joke getJoke(){
-        return jokeRepo.findAll().get(0);
+    public List<Joke> getJoke(){
+        return jokeRepo.findAll();
     }
 
 }

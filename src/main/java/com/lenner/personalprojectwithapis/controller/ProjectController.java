@@ -2,7 +2,9 @@ package com.lenner.personalprojectwithapis.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.lenner.personalprojectwithapis.init.DBInitializer;
+import com.lenner.personalprojectwithapis.models.Joke;
 import com.lenner.personalprojectwithapis.service.ProjectService;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +33,14 @@ public class ProjectController {
 
     @GetMapping("/joke")
     public String joke() throws JSONException {
-        JSONObject dailyJoke = new JSONObject();
-        dailyJoke.put("setup",projectService.getJoke().getSetup());
-        dailyJoke.put("punchline",projectService.getJoke().getPunchline());
-        return dailyJoke.toString();
+        JSONArray jokes = new JSONArray();
+        for (Joke joke: projectService.getJoke()) {
+            JSONObject jokeObject = new JSONObject();
+            jokeObject.put("punchline",joke.getPunchline());
+            jokeObject.put("setup",joke.getSetup());
+            jokes.put(jokeObject);
+        }
+        return jokes.toString();
     }
 
 }

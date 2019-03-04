@@ -16,9 +16,9 @@ import java.net.URL;
 @Component
 public class DBInitializer {
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private static ObjectMapper objectMapper = new ObjectMapper();
 
-    public DBInitializer(PictureRepo pictureRepo) {
+    public DBInitializer(PictureRepo pictureRepo){
 
         RestTemplateBuilder builder = new RestTemplateBuilder();
         RestTemplate restTemplate = builder.build();
@@ -27,11 +27,15 @@ public class DBInitializer {
                 ("https://api.nasa.gov/planetary/apod?api_key=icf7sVa7sxW26v4j6f0rWVuFyJv6pJMyyd6QMVEk", Picture.class);
         pictureRepo.save(pictureResponseEntity.getBody());
 
-
-
     }
 
-    private JsonNode MapData(URL url) throws IOException {
-        return objectMapper.readTree(url);
+    private static JsonNode MapData(String url) throws IOException {
+        URL url1 = new URL(url);
+        return objectMapper.readTree(url1);
+    }
+
+
+    public JsonNode getJoke() throws IOException {
+        return MapData("https://official-joke-api.appspot.com/random_joke\n");
     }
 }

@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -36,21 +35,31 @@ public class DBInitializer {
         for (Joke joke: jokes) {
             jokeRepo.save(joke);
         }
+
+        getSpaceXData();
     }
 
-    private static JsonNode MapData(String url) throws IOException {
-        URL url1 = new URL(url);
-        return objectMapper.readTree(url1);
+    private static JsonNode MapData(String stringUrl) throws IOException {
+        URL url = new URL(stringUrl);
+        return objectMapper.readTree(url);
     }
 
-    @PostConstruct
     private void getJokefromApi() throws IOException {
         JsonNode jokenodes = MapData("https://official-joke-api.appspot.com/random_ten");
         for (JsonNode jokenode: jokenodes) {
             jokes.add(new Joke(jokenode.get("id").intValue(),jokenode.get("type").toString(),
             jokenode.get("setup").toString(),jokenode.get("punchline").toString()));
-
         }
+    }
 
+    private void getSpaceXData() throws IOException {
+        JsonNode spaceX = MapData("https://api.spacexdata.com/v3/launches/latest");
+        JsonNode rocket = spaceX.path("rocket");
+        JsonNode secondStage = rocket.path("second_stage");
+        JsonNode payloads = secondStage.path("payloads");
+        for (JsonNode jsonNode:payloads) {
+
+            System.out.println(jsonNode.get("nationality"));
+        }
     }
 }

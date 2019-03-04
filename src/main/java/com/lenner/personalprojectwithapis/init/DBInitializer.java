@@ -2,6 +2,7 @@ package com.lenner.personalprojectwithapis.init;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lenner.personalprojectwithapis.models.Joke;
 import com.lenner.personalprojectwithapis.models.Picture;
 import com.lenner.personalprojectwithapis.repository.*;
 
@@ -18,7 +19,7 @@ public class DBInitializer {
 
     private static ObjectMapper objectMapper = new ObjectMapper();
 
-    public DBInitializer(PictureRepo pictureRepo){
+    public DBInitializer(PictureRepo pictureRepo,JokeRepo jokeRepo) throws IOException {
 
         RestTemplateBuilder builder = new RestTemplateBuilder();
         RestTemplate restTemplate = builder.build();
@@ -27,6 +28,7 @@ public class DBInitializer {
                 ("https://api.nasa.gov/planetary/apod?api_key=icf7sVa7sxW26v4j6f0rWVuFyJv6pJMyyd6QMVEk", Picture.class);
         pictureRepo.save(pictureResponseEntity.getBody());
 
+        jokeRepo.save(getJoke());
     }
 
     private static JsonNode MapData(String url) throws IOException {
@@ -35,7 +37,8 @@ public class DBInitializer {
     }
 
 
-    public JsonNode getJoke() throws IOException {
-        return MapData("https://official-joke-api.appspot.com/random_joke\n");
+    private Joke getJoke() throws IOException {
+        JsonNode jokenode = MapData("https://official-joke-api.appspot.com/random_joke");
+        return new Joke(jokenode.get("id").intValue(),jokenode.get("type").toString(),jokenode.get("setup").toString(),jokenode.get("punchline").toString());
     }
 }

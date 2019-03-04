@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-
 @CrossOrigin
 @RestController
 public class ProjectController {
@@ -32,10 +30,11 @@ public class ProjectController {
     }
 
     @GetMapping("/joke")
-    public String joke() throws IOException {
-        JsonNode jsonNode = dbInitializer.getJoke();
-        System.out.println(jsonNode);
-        return "pass";
+    public String joke() throws JSONException {
+        JSONObject dailyJoke = new JSONObject();
+        dailyJoke.put("setup",projectService.getJoke().getSetup());
+        dailyJoke.put("punchline",projectService.getJoke().getPunchline());
+        return dailyJoke.toString();
     }
 
 }

@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-mainpage',
@@ -8,15 +7,9 @@ import {HttpClient} from "@angular/common/http";
 })
 export class MainpageComponent implements OnInit {
 
-  public Data : Object;
-
-  constructor(private http:HttpClient) {}
+  constructor() {}
 
   ngOnInit() {
-    this.getPics().subscribe(data => this.Data = data);
   }
 
-  getPics() {
-    return this.http.get('http://localhost:60150/pic')
-  }
 }

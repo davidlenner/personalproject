@@ -22,8 +22,12 @@ public class ProjectService {
         return pictureRepo.findAll().get(0);
     }
 
-    public List<Joke> getJoke(){
-        return jokeRepo.findAll();
+    public Joke getJoke(int randNum){
+        return jokeRepo.getOne(Long.valueOf(randNum));
+    }
+
+    public int jokesCounter(){
+        return jokeRepo.findAll().size();
     }
 
 }

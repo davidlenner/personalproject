@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-joke',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JokeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
+
+  jokes: Object;
 
   ngOnInit() {
+    this.getJokes().subscribe(data => this.jokes = data)
   }
 
+  getJokes() {
+    return this.http.get('http://localhost:60150/joke')
+  }
 }

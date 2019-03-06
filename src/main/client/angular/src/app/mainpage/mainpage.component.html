@@ -1,2 +1,2 @@
-<app-header></app-header>
-<app-picture></app-picture>
+<app-header (selected)="changeContent($event)"></app-header>
+<app-picture *ngIf="loadedContent === 'picture' "></app-picture>

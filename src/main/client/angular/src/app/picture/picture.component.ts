@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 
 @Component({
@@ -8,12 +8,12 @@ import {HttpClient} from "@angular/common/http";
 })
 export class PictureComponent implements OnInit {
 
-  public Data: Object;
+  picData: Object;
 
   constructor(private http:HttpClient) { }
 
   ngOnInit() {
-    this.getPics().subscribe(data => this.Data = data)
+    this.getPics().subscribe(data => this.picData = data)
   }
 
   getPics() {

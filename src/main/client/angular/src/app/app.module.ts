@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { HeaderComponent } from './header/header.component';
 import { PictureComponent } from './picture/picture.component';
+import { JokeComponent } from './joke/joke.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainpageComponent,
     HeaderComponent,
-    PictureComponent
+    PictureComponent,
+    JokeComponent
   ],
   imports: [
     BrowserModule,

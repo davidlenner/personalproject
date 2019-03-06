@@ -7,9 +7,15 @@ import {Component, OnInit} from '@angular/core';
 })
 export class MainpageComponent implements OnInit {
 
+  loadedContent = 'picture';
+
   constructor() {}
 
   ngOnInit() {
+  }
+
+  changeContent(content: string){
+    this.loadedContent = content
   }
 
 }

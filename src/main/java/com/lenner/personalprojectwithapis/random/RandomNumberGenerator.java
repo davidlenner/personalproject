@@ -9,6 +9,6 @@ public class RandomNumberGenerator {
 
     public int generateRandNum(int number){
         Random random = new Random();
-        return random.nextInt(number);
+        return random.nextInt((number - 2) + 1) + 2;
     }
 }

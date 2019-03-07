@@ -6,6 +6,8 @@ import com.lenner.personalprojectwithapis.models.Joke;
 import com.lenner.personalprojectwithapis.models.Picture;
 import com.lenner.personalprojectwithapis.repository.*;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -14,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Component
@@ -22,7 +25,7 @@ public class DBInitializer {
     private static ObjectMapper objectMapper = new ObjectMapper();
     private List<Joke> jokes = new ArrayList<>();
 
-    public DBInitializer(PictureRepo pictureRepo,JokeRepo jokeRepo) throws IOException {
+    public DBInitializer(PictureRepo pictureRepo,JokeRepo jokeRepo) throws IOException, JSONException {
 
         RestTemplateBuilder builder = new RestTemplateBuilder();
         RestTemplate restTemplate = builder.build();
@@ -31,12 +34,12 @@ public class DBInitializer {
                 ("https://api.nasa.gov/planetary/apod?api_key=icf7sVa7sxW26v4j6f0rWVuFyJv6pJMyyd6QMVEk", Picture.class);
         pictureRepo.save(pictureResponseEntity.getBody());
 
-        getJokefromApi();
+        getJokeFromApi();
         for (Joke joke: jokes) {
             jokeRepo.save(joke);
         }
 
-        getSpaceXData();
+
     }
 
     private static JsonNode MapData(String stringUrl) throws IOException {
@@ -44,22 +47,29 @@ public class DBInitializer {
         return objectMapper.readTree(url);
     }
 
-    private void getJokefromApi() throws IOException {
-        JsonNode jokenodes = MapData("https://official-joke-api.appspot.com/random_ten");
-        for (JsonNode jokenode: jokenodes) {
-            jokes.add(new Joke(jokenode.get("id").intValue(),jokenode.get("type").toString(),
-            jokenode.get("setup").toString(),jokenode.get("punchline").toString()));
+    private void getJokeFromApi() throws IOException {
+        JsonNode jokeNodes = MapData("https://official-joke-api.appspot.com/random_ten");
+        for (JsonNode jsonNode: jokeNodes) {
+            jokes.add(new Joke(jsonNode.get("id").intValue(),jsonNode.get("type").toString(),
+            jsonNode.get("setup").toString(),jsonNode.get("punchline").toString()));
         }
     }
 
-    private void getSpaceXData() throws IOException {
+    public JSONObject getSpaceXData() throws IOException {
+        HashMap<String,String> spaceXHashMap = new HashMap<>();
         JsonNode spaceX = MapData("https://api.spacexdata.com/v3/launches/latest");
+        JsonNode launchSite = spaceX.path("launch_site");
         JsonNode rocket = spaceX.path("rocket");
         JsonNode secondStage = rocket.path("second_stage");
-        JsonNode payloads = secondStage.path("payloads");
-        for (JsonNode jsonNode:payloads) {
+        JsonNode payloads = secondStage.path("payloads").get(0);
+        spaceXHashMap.put("rocket_type",rocket.get("rocket_type").textValue());
+        spaceXHashMap.put("site_name_long",launchSite.get("site_name_long").textValue());
+        spaceXHashMap.put("mission_name",spaceX.get("mission_name").textValue());
+        spaceXHashMap.put("launch_date_local",spaceX.get("launch_date_local").textValue());
+        spaceXHashMap.put("details",spaceX.get("details").textValue());
+        spaceXHashMap.put("payload_type",payloads.get("payload_type").textValue());
+        spaceXHashMap.put("payload_mass_kg",payloads.get("payload_mass_kg").textValue());
+        return new JSONObject(spaceXHashMap);
 
-            System.out.println(jsonNode.get("nationality"));
-        }
     }
 }

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 @CrossOrigin
 @RestController
 public class ProjectController {
@@ -44,6 +46,11 @@ public class ProjectController {
 
         return jokeObject.toString();
 
+    }
+
+    @GetMapping("/spacex")
+    public String spaceX() throws IOException {
+        return dbInitializer.getSpaceXData().toString();
     }
 
 }

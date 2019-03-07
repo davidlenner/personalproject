@@ -8,6 +8,7 @@ import { MainpageComponent } from './mainpage/mainpage.component';
 import { HeaderComponent } from './header/header.component';
 import { PictureComponent } from './picture/picture.component';
 import { JokeComponent } from './joke/joke.component';
+import { SpaceXComponent } from './space-x/space-x.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { JokeComponent } from './joke/joke.component';
     MainpageComponent,
     HeaderComponent,
     PictureComponent,
-    JokeComponent
+    JokeComponent,
+    SpaceXComponent
   ],
   imports: [
     BrowserModule,

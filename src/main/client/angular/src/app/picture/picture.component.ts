@@ -10,14 +10,17 @@ export class PictureComponent implements OnInit {
 
   picData: Object;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   ngOnInit() {
-    this.getPics().subscribe(data => this.picData = data)
+    this.getPics().subscribe(data => this.picData = data);
+    console.log(this.picData)
   }
 
   getPics() {
     return this.http.get('http://localhost:60150/pic')
   }
-
 }
+
+

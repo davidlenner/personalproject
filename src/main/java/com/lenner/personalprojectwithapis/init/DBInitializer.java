@@ -25,7 +25,7 @@ public class DBInitializer {
     private static ObjectMapper objectMapper = new ObjectMapper();
     private List<Joke> jokes = new ArrayList<>();
 
-    public DBInitializer(PictureRepo pictureRepo,JokeRepo jokeRepo) throws IOException, JSONException {
+    public DBInitializer(PictureRepo pictureRepo,JokeRepo jokeRepo) throws IOException {
 
         RestTemplateBuilder builder = new RestTemplateBuilder();
         RestTemplate restTemplate = builder.build();
@@ -57,12 +57,12 @@ public class DBInitializer {
 
     public JSONObject getSpaceXData() throws IOException {
         HashMap<String,String> spaceXHashMap = new HashMap<>();
-        JsonNode spaceX = MapData("https://api.spacexdata.com/v3/launches/latest");
+        JsonNode spaceX = MapData("https://api.spacexdata.com/v3/launches/next");
         JsonNode launchSite = spaceX.path("launch_site");
         JsonNode rocket = spaceX.path("rocket");
         JsonNode secondStage = rocket.path("second_stage");
         JsonNode payloads = secondStage.path("payloads").get(0);
-        spaceXHashMap.put("rocket_type",rocket.get("rocket_type").textValue());
+        spaceXHashMap.put("rocket_name",rocket.get("rocket_name").textValue());
         spaceXHashMap.put("site_name_long",launchSite.get("site_name_long").textValue());
         spaceXHashMap.put("mission_name",spaceX.get("mission_name").textValue());
         spaceXHashMap.put("launch_date_local",spaceX.get("launch_date_local").textValue());

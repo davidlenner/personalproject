@@ -17,6 +17,10 @@ public class Picture {
     private String title;
     private String url;
 
+    public Picture(){
+
+    }
+
     public Long getId() {
         return id;
     }

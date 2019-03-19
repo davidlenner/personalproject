@@ -22,5 +22,3 @@ export class PictureComponent implements OnInit {
     return this.http.get('/pic')
   }
 }
-
-

@@ -6,7 +6,6 @@ import com.lenner.personalprojectwithapis.models.Joke;
 import com.lenner.personalprojectwithapis.models.Picture;
 import com.lenner.personalprojectwithapis.repository.*;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;

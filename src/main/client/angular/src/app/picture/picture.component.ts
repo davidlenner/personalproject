@@ -19,7 +19,7 @@ export class PictureComponent implements OnInit {
   }
 
   getPics() {
-    return this.http.get('http://localhost:60150/pic')
+    return this.http.get('/pic')
   }
 }
 

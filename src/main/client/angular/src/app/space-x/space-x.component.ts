@@ -17,6 +17,6 @@ export class SpaceXComponent implements OnInit {
   }
 
   getSpaceXData(){
-    return this.http.get("http://localhost:60150/spacex")
+    return this.http.get("/spacex")
   }
 }

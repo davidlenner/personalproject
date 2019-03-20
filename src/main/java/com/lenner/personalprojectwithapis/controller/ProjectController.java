@@ -1,5 +1,6 @@
 package com.lenner.personalprojectwithapis.controller;
 
+import com.lenner.personalprojectwithapis.models.Picture;
 import com.lenner.personalprojectwithapis.models.SpaceXData;
 import com.lenner.personalprojectwithapis.random.RandomNumberGenerator;
 import com.lenner.personalprojectwithapis.service.ProjectService;
@@ -22,10 +23,15 @@ public class ProjectController {
 
     @GetMapping("/pic")
     public String index() throws JSONException {
+        Picture picture = projectService.getPicture();
 
         JSONObject obj = new JSONObject();
-        obj.put("picture", projectService.getPicture().getUrl());
-        obj.put("title", projectService.getPicture().getTitle());
+        obj.put("type",projectService.checkUrl(picture));
+        if (projectService.checkUrl(picture)){
+            obj.put("picture", picture.getUrl().substring(30));
+        }else {
+        obj.put("picture", picture.getUrl());}
+        obj.put("title", picture.getTitle());
         return obj.toString();
     }
 
@@ -49,8 +55,7 @@ public class ProjectController {
         spaceXJson.put("launch_date_local",spaceXData.getLaunchDateLocal());
         spaceXJson.put("payload_type",spaceXData.getPayloadType());
         spaceXJson.put("site_name_long",spaceXData.getSiteNameLong());
-        spaceXJson.put("payload_mass_kg",spaceXData.getPayloadMassKg());
-        spaceXJson.put("rocketName",spaceXData.getRocketName());
+        spaceXJson.put("rocket_name",spaceXData.getRocketName());
         return spaceXJson.toString();
     }
 

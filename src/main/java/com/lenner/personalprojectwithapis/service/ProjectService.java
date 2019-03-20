@@ -1,5 +1,6 @@
 package com.lenner.personalprojectwithapis.service;
 
+import com.google.gson.JsonObject;
 import com.lenner.personalprojectwithapis.models.Joke;
 import com.lenner.personalprojectwithapis.models.Picture;
 import com.lenner.personalprojectwithapis.models.SpaceXData;
@@ -35,5 +36,13 @@ public class ProjectService {
     }
 
     public SpaceXData getSpaceX() {return spaceXRepo.findAll().get(0); }
+
+    public boolean checkUrl(Picture picture){
+        if (picture.getUrl().contains("youtube")) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 }

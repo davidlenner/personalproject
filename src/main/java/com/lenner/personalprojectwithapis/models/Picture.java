@@ -1,5 +1,7 @@
 package com.lenner.personalprojectwithapis.models;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,14 +13,26 @@ public class Picture {
     private String date;
     @Lob
     private String explanation;
-    private String hdurl;
+    @Nullable
     private String mediaType;
+    @Nullable
     private String serviceVersion;
+    @Nullable
     private String title;
+    @Nullable
     private String url;
 
     public Picture(){
+    }
 
+    public Picture(String date, String explanation,
+                   String mediaType, String serviceVersion, String title, String url) {
+        this.date = date;
+        this.explanation = explanation;
+        this.mediaType = mediaType;
+        this.serviceVersion = serviceVersion;
+        this.title = title;
+        this.url = url;
     }
 
     public Long getId() {
@@ -43,14 +57,6 @@ public class Picture {
 
     public void setExplanation(String explanation) {
         this.explanation = explanation;
-    }
-
-    public String getHdurl() {
-        return hdurl;
-    }
-
-    public void setHdurl(String hdurl) {
-        this.hdurl = hdurl;
     }
 
     public String getMediaType() {

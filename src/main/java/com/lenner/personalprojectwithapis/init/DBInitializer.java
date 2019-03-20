@@ -6,15 +6,11 @@ import com.lenner.personalprojectwithapis.models.Joke;
 import com.lenner.personalprojectwithapis.models.Picture;
 import com.lenner.personalprojectwithapis.models.SpaceXData;
 import com.lenner.personalprojectwithapis.repository.*;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Component
@@ -25,21 +21,15 @@ public class DBInitializer {
 
     public DBInitializer(PictureRepo pictureRepo,JokeRepo jokeRepo,SpaceXRepo spaceXRepo) throws IOException {
 
-        RestTemplateBuilder builder = new RestTemplateBuilder();
-        RestTemplate restTemplate = builder.build();
-
-        ResponseEntity<Picture> pictureResponseEntity = restTemplate.getForEntity
-                ("https://api.nasa.gov/planetary/apod?api_key=icf7sVa7sxW26v4j6f0rWVuFyJv6pJMyyd6QMVEk", Picture.class);
-        pictureRepo.save(pictureResponseEntity.getBody());
+        pictureRepo.save(getPic());
 
         getJokeFromApi();
+
         spaceXRepo.save(getSpaceXData());
+
         for (Joke joke: jokes) {
             jokeRepo.save(joke);
         }
-
-
-
     }
 
     private static JsonNode MapData(String stringUrl) throws IOException {
@@ -63,9 +53,19 @@ public class DBInitializer {
         JsonNode payloads = secondStage.path("payloads").get(0);
 
         return new SpaceXData(spaceX.get("mission_name").textValue(),spaceX.get("launch_date_local").textValue(),
-                payloads.get("payload_type").textValue(),payloads.get("payload_mass_kg").textValue(),
+                payloads.get("payload_type").textValue(),
                 launchSite.get("site_name_long").textValue(),spaceX.get("details").textValue(),
                 rocket.get("rocket_name").textValue());
 
     }
+
+    private Picture getPic() throws IOException {
+        JsonNode pictureNode = MapData(
+                "https://api.nasa.gov/planetary/apod?api_key=icf7sVa7sxW26v4j6f0rWVuFyJv6pJMyyd6QMVEk");
+        return new Picture(pictureNode.get("date").textValue(),pictureNode.get("explanation").textValue(),
+                pictureNode.get("media_type").textValue(),
+                pictureNode.get("service_version").textValue(),pictureNode.get("title").textValue(),
+                pictureNode.get("url").textValue());
+    }
+
 }

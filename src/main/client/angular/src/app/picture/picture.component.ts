@@ -15,7 +15,6 @@ export class PictureComponent implements OnInit {
 
   ngOnInit() {
     this.getPics().subscribe(data => this.picData = data);
-    console.log(this.picData)
   }
 
   getPics() {

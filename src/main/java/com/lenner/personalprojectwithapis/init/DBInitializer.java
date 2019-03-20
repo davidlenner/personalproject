@@ -6,8 +6,6 @@ import com.lenner.personalprojectwithapis.models.Joke;
 import com.lenner.personalprojectwithapis.models.Picture;
 import com.lenner.personalprojectwithapis.models.SpaceXData;
 import com.lenner.personalprojectwithapis.repository.*;
-
-import org.json.JSONObject;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -58,20 +56,11 @@ public class DBInitializer {
     }
 
     private SpaceXData getSpaceXData() throws IOException {
-        HashMap<String,String> spaceXHashMap = new HashMap<>();
         JsonNode spaceX = MapData("https://api.spacexdata.com/v3/launches/next");
         JsonNode launchSite = spaceX.path("launch_site");
         JsonNode rocket = spaceX.path("rocket");
         JsonNode secondStage = rocket.path("second_stage");
         JsonNode payloads = secondStage.path("payloads").get(0);
-        /*spaceXHashMap.put("rocket_name",rocket.get("rocket_name").textValue());
-        spaceXHashMap.put("site_name_long",launchSite.get("site_name_long").textValue());
-        spaceXHashMap.put("mission_name",spaceX.get("mission_name").textValue());
-        spaceXHashMap.put("launch_date_local",spaceX.get("launch_date_local").textValue());
-        spaceXHashMap.put("details",spaceX.get("details").textValue());
-        spaceXHashMap.put("payload_type",payloads.get("payload_type").textValue());
-        spaceXHashMap.put("payload_mass_kg",payloads.get("payload_mass_kg").textValue());
-        return new JSONObject(spaceXHashMap);*/
 
         return new SpaceXData(spaceX.get("mission_name").textValue(),spaceX.get("launch_date_local").textValue(),
                 payloads.get("payload_type").textValue(),payloads.get("payload_mass_kg").textValue(),

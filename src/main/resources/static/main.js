@@ -271,7 +271,7 @@ module.exports = ".gif {\n  margin-right: 100px;\n}\n\n.style {\n  font-size: 50
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<head>\n  <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.7.2/css/all.css\" integrity=\"sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr\" crossorigin=\"anonymous\">\n</head>\n<div class=\"row\">\n  <div class=\"col-xs-12\">\n    <ul>\n      <li>\n        <p class=\"style\">{{ jokes.setup }}</p>\n      </li>\n      <li>\n        <p class=\"style\">{{ jokes.punchline }}</p>\n      </li>\n    </ul>\n  </div>\n  <div class=\"shadow p-3 mb-5 bg-light pull-right\">\n    <img src=\"http://www.animatedimages.org/data/media/1309/animated-laughing-image-0175.gif\" class=\"img-fluid gif\" alt=\"Responsive image\">\n  </div>\n</div>\n\n"
+module.exports = "<head>\n  <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.7.2/css/all.css\"\n        integrity=\"sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr\" crossorigin=\"anonymous\">\n</head>\n<div class=\"row\">\n  <div class=\"col-xs-12\">\n    <ul>\n      <li>\n        <p class=\"style\">{{ jokes.setup }}</p>\n      </li>\n      <li>\n        <p class=\"style\">{{ jokes.punchline }}</p>\n      </li>\n    </ul>\n  </div>\n  <div class=\"shadow p-3 mb-5 bg-light pull-right\">\n    <img src=\"http://www.animatedimages.org/data/media/1309/animated-laughing-image-0175.gif\"\n         class=\"img-fluid gif\" alt=\"Responsive image\">\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -595,7 +595,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/david/codecool/personalprojects/personalproject/src/main/client/angular/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/david/codecool/personalproject/src/main/client/angular/src/main.ts */"./src/main.ts");
 
 
 /***/ })

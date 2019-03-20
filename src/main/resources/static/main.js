@@ -271,7 +271,7 @@ module.exports = ".gif {\n  margin-right: 100px;\n}\n\n.style {\n  font-size: 50
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<head>\n  <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.7.2/css/all.css\"\n        integrity=\"sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr\" crossorigin=\"anonymous\">\n</head>\n<div class=\"row\">\n  <div class=\"col-xs-12\">\n    <ul>\n      <li>\n        <p class=\"style\">{{ jokes.setup }}</p>\n      </li>\n      <li>\n        <p class=\"style\">{{ jokes.punchline }}</p>\n      </li>\n    </ul>\n  </div>\n  <div class=\"shadow p-3 mb-5 bg-light pull-right\">\n    <img src=\"http://www.animatedimages.org/data/media/1309/animated-laughing-image-0175.gif\"\n         class=\"img-fluid gif\" alt=\"Responsive image\">\n  </div>\n</div>\n\n"
+module.exports = "<head>\n  <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.7.2/css/all.css\"\n        integrity=\"sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr\" crossorigin=\"anonymous\">\n</head>\n<div class=\"row\">\n  <div class=\"col-xs-12\">\n    <ul>\n      <li>\n        <p class=\"style\">{{ jokes.setup }}</p>\n      </li>\n      <li>\n        <p class=\"style\">{{ jokes.punchline }}</p>\n      </li>\n    </ul>\n  </div>\n  <div class=\"shadow p-3 mb-5 bg-light pull-right\">\n    <img src=\"https://www.animatedimages.org/data/media/1309/animated-laughing-image-0175.gif\"\n         class=\"img-fluid gif\" alt=\"Responsive image\">\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -409,7 +409,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-md-12\" *ngIf=\"!picData.type; else video\">\n    <strong>{{ picData.title }}</strong>\n    <img [src]=\"picData.picture\" [width]=\"800\" class=\"img-responsive\">\n  </div>\n  <ng-template #video>\n    <div class=\"col-md-12\" >\n      <strong>{{ picData.title }}</strong>\n      <iframe width=\"560\" height=\"315\" src = \"'https://www.youtube.com/embed/' + {{ picData.picture }}\" frameborder=\"0\"\n              allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n    </div>\n  </ng-template>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"col-md-12\" *ngIf=\"!picData.type; else video\">\n    <strong>{{ picData.title }}</strong>\n    <img [src]=\"picData.picture\" [width]=\"800\" class=\"img-responsive\">\n  </div>\n  <ng-template #video>\n    <div class=\"col-md-12\" >\n      <strong>{{ picData.title }}</strong>\n      <iframe width=\"560\" height=\"315\" src = \"https://www.youtube.com/embed/ + {{ picData.picture }}\" frameborder=\"0\"\n              allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n    </div>\n  </ng-template>\n</div>\n"
 
 /***/ }),
 

@@ -14,6 +14,7 @@ public class SpaceXData {
     private String payloadType;
     private String payloadMassKg;
     private String siteNameLong;
+    @Lob
     private String details;
     private String rocketName;
 
@@ -31,7 +32,7 @@ public class SpaceXData {
         this.rocketName = rocketName;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

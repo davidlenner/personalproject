@@ -25,9 +25,6 @@ public class ProjectController {
     ProjectService projectService;
 
     @Autowired
-    DBInitializer dbInitializer;
-
-    @Autowired
     RandomNumberGenerator randomNumberGenerator;
 
     @GetMapping("/pic")

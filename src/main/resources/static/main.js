@@ -409,7 +409,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-md-12\">\n    <strong>{{ picData.title }}</strong>\n    <img [src]=\"picData.picture\" [width]=\"600\" class=\"img-responsive\">\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"col-md-12\" *ngIf=\"!picData.type; else video\">\n    <strong>{{ picData.title }}</strong>\n    <img [src]=\"picData.picture\" [width]=\"800\" class=\"img-responsive\">\n  </div>\n  <ng-template #video>\n    <div class=\"col-md-12\" >\n      <strong>{{ picData.title }}</strong>\n      <iframe width=\"560\" height=\"315\" src = \"'https://www.youtube.com/embed/' + {{ picData.picture }}\" frameborder=\"0\"\n              allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n    </div>\n  </ng-template>\n</div>\n"
 
 /***/ }),
 
@@ -443,7 +443,6 @@ var PictureComponent = /** @class */ (function () {
     PictureComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.getPics().subscribe(function (data) { return _this.picData = data; });
-        console.log(this.picData);
     };
     PictureComponent.prototype.getPics = function () {
         return this.http.get('/pic');
@@ -481,7 +480,7 @@ module.exports = "/*body {*/\n  /*background-image: url(\"https://cdn.teslarati.
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<body>\n  <strong>Upcoming Mission</strong>\n  <table class=\"table table-bordered table-md-responsive\">\n    <tr>\n      <td><strong>Mission Name</strong></td>\n      <td>{{ spaceXData.mission_name }}</td>\n    </tr>\n    <tr>\n      <td><strong>Launch Date Local</strong></td>\n      <td>{{ spaceXData.launch_date_local }}</td>\n    </tr>\n    <tr>\n      <td><strong>Payload Type</strong></td>\n      <td>{{ spaceXData.payload_type }}</td>\n    </tr>\n    <tr>\n      <td><strong>Payload Mass</strong></td>\n      <td>{{ spaceXData.payload_mass_kg }}</td>\n    </tr>\n    <tr>\n      <td><strong>Rocket Name</strong></td>\n      <td>{{ spaceXData.rocket_name }}</td>\n    </tr>\n    <tr>\n      <td><strong>Site Name</strong></td>\n      <td>{{ spaceXData.site_name_long }}</td>\n    </tr>\n    <tr>\n      <td><strong>Details</strong></td>\n      <td>{{ spaceXData.details }}</td>\n    </tr>\n  </table>\n</body>\n\n"
+module.exports = "<body>\n  <strong>Upcoming Mission</strong>\n  <table class=\"table table-bordered table-md-responsive\">\n    <tr>\n      <td><strong>Mission Name</strong></td>\n      <td>{{ spaceXData.mission_name }}</td>\n    </tr>\n    <tr>\n      <td><strong>Launch Date Local</strong></td>\n      <td>{{ spaceXData.launch_date_local }}</td>\n    </tr>\n    <tr>\n      <td><strong>Payload Type</strong></td>\n      <td>{{ spaceXData.payload_type }}</td>\n    </tr>\n    <tr>\n      <td><strong>Rocket Name</strong></td>\n      <td>{{ spaceXData.rocket_name }}</td>\n    </tr>\n    <tr>\n      <td><strong>Site Name</strong></td>\n      <td>{{ spaceXData.site_name_long }}</td>\n    </tr>\n    <tr>\n      <td><strong>Details</strong></td>\n      <td>{{ spaceXData.details }}</td>\n    </tr>\n  </table>\n</body>\n\n"
 
 /***/ }),
 

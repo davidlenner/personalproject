@@ -3,7 +3,9 @@ package com.lenner.personalprojectwithapis.controller;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.lenner.personalprojectwithapis.init.DBInitializer;
 import com.lenner.personalprojectwithapis.models.Joke;
+import com.lenner.personalprojectwithapis.models.SpaceXData;
 import com.lenner.personalprojectwithapis.random.RandomNumberGenerator;
+import com.lenner.personalprojectwithapis.repository.SpaceXRepo;
 import com.lenner.personalprojectwithapis.service.ProjectService;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,8 +51,17 @@ public class ProjectController {
     }
 
     @GetMapping("/spacex")
-    public String spaceX() throws IOException {
-        return dbInitializer.getSpaceXData().toString();
+    public String spaceX() throws JSONException {
+        SpaceXData spaceXData = projectService.getSpaceX();
+        JSONObject spaceXJson = new JSONObject();
+        spaceXJson.put("mission_name",spaceXData.getMissionName());
+        spaceXJson.put("details",spaceXData.getDetails());
+        spaceXJson.put("launchDateLocal",spaceXData.getLaunchDateLocal());
+        spaceXJson.put("payloadType",spaceXData.getPayloadType());
+        spaceXJson.put("siteNameLong",spaceXData.getSiteNameLong());
+        spaceXJson.put("payloadMassKg",spaceXData.getPayloadMassKg());
+        spaceXJson.put("rocketName",spaceXData.getRocketName());
+        return spaceXJson.toString();
     }
 
 }

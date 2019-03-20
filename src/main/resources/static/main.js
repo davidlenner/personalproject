@@ -307,7 +307,7 @@ var JokeComponent = /** @class */ (function () {
         this.getJokes().subscribe(function (data) { return _this.jokes = data; });
     };
     JokeComponent.prototype.getJokes = function () {
-        return this.http.get('http://localhost:60150/joke');
+        return this.http.get('/joke');
     };
     JokeComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({

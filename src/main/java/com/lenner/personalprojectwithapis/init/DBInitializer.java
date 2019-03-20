@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lenner.personalprojectwithapis.models.Joke;
 import com.lenner.personalprojectwithapis.models.Picture;
+import com.lenner.personalprojectwithapis.models.SpaceXData;
 import com.lenner.personalprojectwithapis.repository.*;
 
 import org.json.JSONObject;
@@ -24,7 +25,7 @@ public class DBInitializer {
     private static ObjectMapper objectMapper = new ObjectMapper();
     private List<Joke> jokes = new ArrayList<>();
 
-    public DBInitializer(PictureRepo pictureRepo,JokeRepo jokeRepo) throws IOException {
+    public DBInitializer(PictureRepo pictureRepo,JokeRepo jokeRepo,SpaceXRepo spaceXRepo) throws IOException {
 
         RestTemplateBuilder builder = new RestTemplateBuilder();
         RestTemplate restTemplate = builder.build();
@@ -34,9 +35,11 @@ public class DBInitializer {
         pictureRepo.save(pictureResponseEntity.getBody());
 
         getJokeFromApi();
+        spaceXRepo.save(getSpaceXData());
         for (Joke joke: jokes) {
             jokeRepo.save(joke);
         }
+
 
 
     }
@@ -54,21 +57,26 @@ public class DBInitializer {
         }
     }
 
-    public JSONObject getSpaceXData() throws IOException {
+    private SpaceXData getSpaceXData() throws IOException {
         HashMap<String,String> spaceXHashMap = new HashMap<>();
         JsonNode spaceX = MapData("https://api.spacexdata.com/v3/launches/next");
         JsonNode launchSite = spaceX.path("launch_site");
         JsonNode rocket = spaceX.path("rocket");
         JsonNode secondStage = rocket.path("second_stage");
         JsonNode payloads = secondStage.path("payloads").get(0);
-        spaceXHashMap.put("rocket_name",rocket.get("rocket_name").textValue());
+        /*spaceXHashMap.put("rocket_name",rocket.get("rocket_name").textValue());
         spaceXHashMap.put("site_name_long",launchSite.get("site_name_long").textValue());
         spaceXHashMap.put("mission_name",spaceX.get("mission_name").textValue());
         spaceXHashMap.put("launch_date_local",spaceX.get("launch_date_local").textValue());
         spaceXHashMap.put("details",spaceX.get("details").textValue());
         spaceXHashMap.put("payload_type",payloads.get("payload_type").textValue());
         spaceXHashMap.put("payload_mass_kg",payloads.get("payload_mass_kg").textValue());
-        return new JSONObject(spaceXHashMap);
+        return new JSONObject(spaceXHashMap);*/
+
+        return new SpaceXData(spaceX.get("mission_name").textValue(),spaceX.get("launch_date_local").textValue(),
+                payloads.get("payload_type").textValue(),payloads.get("payload_mass_kg").textValue(),
+                launchSite.get("site_name_long").textValue(),spaceX.get("details").textValue(),
+                rocket.get("rocket_name").textValue());
 
     }
 }

@@ -260,7 +260,7 @@ var HeaderComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2pva2Uvam9rZS5jb21wb25lbnQuY3NzIn0= */"
+module.exports = ".gif {\n  margin-right: 100px;\n}\n\n.style {\n  font-size: 50px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvam9rZS9qb2tlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxvQkFBb0I7Q0FDckI7O0FBRUQ7RUFDRSxnQkFBZ0I7Q0FDakIiLCJmaWxlIjoic3JjL2FwcC9qb2tlL2pva2UuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5naWYge1xuICBtYXJnaW4tcmlnaHQ6IDEwMHB4O1xufVxuXG4uc3R5bGUge1xuICBmb250LXNpemU6IDUwcHg7XG59XG4iXX0= */"
 
 /***/ }),
 
@@ -271,7 +271,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12\">\n    <ul>\n      <li>\n        <p>{{ jokes.setup }}</p>\n      </li>\n      <li>\n        <p>{{ jokes.punchline }}</p>\n      </li>\n    </ul>\n  </div>\n</div>\n"
+module.exports = "<head>\n  <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.7.2/css/all.css\" integrity=\"sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr\" crossorigin=\"anonymous\">\n</head>\n<div class=\"row\">\n  <div class=\"col-xs-12\">\n    <ul>\n      <li>\n        <p class=\"style\">{{ jokes.setup }}</p>\n      </li>\n      <li>\n        <p class=\"style\">{{ jokes.punchline }}</p>\n      </li>\n    </ul>\n  </div>\n  <div class=\"shadow p-3 mb-5 bg-light pull-right\">\n    <img src=\"http://www.animatedimages.org/data/media/1309/animated-laughing-image-0175.gif\" class=\"img-fluid gif\" alt=\"Responsive image\">\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -307,7 +307,7 @@ var JokeComponent = /** @class */ (function () {
         this.getJokes().subscribe(function (data) { return _this.jokes = data; });
     };
     JokeComponent.prototype.getJokes = function () {
-        return this.http.get('/joke');
+        return this.http.get('http://localhost:60150/joke');
     };
     JokeComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({

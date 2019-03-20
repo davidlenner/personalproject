@@ -53,10 +53,10 @@ public class ProjectController {
         JSONObject spaceXJson = new JSONObject();
         spaceXJson.put("mission_name",spaceXData.getMissionName());
         spaceXJson.put("details",spaceXData.getDetails());
-        spaceXJson.put("launchDateLocal",spaceXData.getLaunchDateLocal());
-        spaceXJson.put("payloadType",spaceXData.getPayloadType());
-        spaceXJson.put("siteNameLong",spaceXData.getSiteNameLong());
-        spaceXJson.put("payloadMassKg",spaceXData.getPayloadMassKg());
+        spaceXJson.put("launch_date_local",spaceXData.getLaunchDateLocal());
+        spaceXJson.put("payload_type",spaceXData.getPayloadType());
+        spaceXJson.put("site_name_long",spaceXData.getSiteNameLong());
+        spaceXJson.put("payload_mass_kg",spaceXData.getPayloadMassKg());
         spaceXJson.put("rocketName",spaceXData.getRocketName());
         return spaceXJson.toString();
     }

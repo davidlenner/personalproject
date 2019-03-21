@@ -20,7 +20,7 @@ export class PictureComponent implements OnInit {
   }
 
   getPicsTitle() {
-    return this.http.get('http://localhost:60150/pictitle');
+    return this.http.get('/pictitle');
   }
 
   sendPicData() {
@@ -31,7 +31,7 @@ export class PictureComponent implements OnInit {
   }
 
   getPicUrl() {
-    return this.http.get('http://localhost:60150/pic');
+    return this.http.get('/pic');
   }
 
   photoURL() {

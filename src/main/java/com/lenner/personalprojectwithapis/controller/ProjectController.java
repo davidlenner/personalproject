@@ -44,7 +44,7 @@ public class ProjectController {
     @GetMapping("/joke")
     public String joke() throws JSONException {
         int randomNumber = randomNumberGenerator.generateRandNum(projectService.jokesCounter());
-        HashMap<String,String> jokeObject = new HashMap<>();
+        JSONObject jokeObject = new JSONObject();
         jokeObject.put("punchline",projectService.getJoke(randomNumber).getPunchline());
         jokeObject.put("setup",projectService.getJoke(randomNumber).getSetup());
 
@@ -55,7 +55,7 @@ public class ProjectController {
     @GetMapping("/spacex")
     public String spaceX() throws JSONException {
         SpaceXData spaceXData = projectService.getSpaceX();
-        HashMap<String,String> spaceXJson = new HashMap<>();
+        JSONObject spaceXJson = new JSONObject();
         spaceXJson.put("mission_name",spaceXData.getMissionName());
         spaceXJson.put("details",spaceXData.getDetails());
         spaceXJson.put("launch_date_local",spaceXData.getLaunchDateLocal());

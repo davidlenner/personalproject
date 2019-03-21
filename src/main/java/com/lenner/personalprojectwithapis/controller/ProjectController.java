@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+
 @CrossOrigin
 @RestController
 public class ProjectController {
@@ -21,24 +23,28 @@ public class ProjectController {
     @Autowired
     RandomNumberGenerator randomNumberGenerator;
 
-    @GetMapping("/pic")
+
+
+    @GetMapping("/pictitle")
     public String index() throws JSONException {
         Picture picture = projectService.getPicture();
-
         JSONObject obj = new JSONObject();
         obj.put("type",projectService.checkUrl(picture));
-        if (projectService.checkUrl(picture)){
-            obj.put("picture", picture.getUrl().substring(30));
-        }else {
-        obj.put("picture", picture.getUrl());}
         obj.put("title", picture.getTitle());
         return obj.toString();
+    }
+    @GetMapping("/pic")
+    public String pictureUrl() throws JSONException {
+        Picture picture = projectService.getPicture();
+        JSONObject pictureurl = new JSONObject();
+        pictureurl.put("url", picture.getUrl());
+        return pictureurl.toString();
     }
 
     @GetMapping("/joke")
     public String joke() throws JSONException {
         int randomNumber = randomNumberGenerator.generateRandNum(projectService.jokesCounter());
-        JSONObject jokeObject = new JSONObject();
+        HashMap<String,String> jokeObject = new HashMap<>();
         jokeObject.put("punchline",projectService.getJoke(randomNumber).getPunchline());
         jokeObject.put("setup",projectService.getJoke(randomNumber).getSetup());
 
@@ -49,7 +55,7 @@ public class ProjectController {
     @GetMapping("/spacex")
     public String spaceX() throws JSONException {
         SpaceXData spaceXData = projectService.getSpaceX();
-        JSONObject spaceXJson = new JSONObject();
+        HashMap<String,String> spaceXJson = new HashMap<>();
         spaceXJson.put("mission_name",spaceXData.getMissionName());
         spaceXJson.put("details",spaceXData.getDetails());
         spaceXJson.put("launch_date_local",spaceXData.getLaunchDateLocal());

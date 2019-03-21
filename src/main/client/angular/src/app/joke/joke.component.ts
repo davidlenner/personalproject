@@ -17,6 +17,6 @@ export class JokeComponent implements OnInit {
   }
 
   getJokes() {
-    return this.http.get('/joke')
+    return this.http.get('http://localhost:16150/joke')
   }
 }

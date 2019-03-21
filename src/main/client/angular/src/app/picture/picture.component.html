@@ -1,13 +1,14 @@
 <div class="row">
-  <div class="col-md-12" *ngIf="!picData.type; else video">
+  <div class="col-md-12" *ngIf="picData.type == 'false',else video">
     <strong>{{ picData.title }}</strong>
-    <img [src]="picData.picture" [width]="800" class="img-responsive">
+    <img src="{{ picUrl.url }}" alt="{{picData.title}}" [width]="800" class="img-responsive">
   </div>
   <ng-template #video>
     <div class="col-md-12" >
+      <iframe width="750" height="500" [src] = "photoURL()" frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+      </iframe><br>
       <strong>{{ picData.title }}</strong>
-      <iframe width="560" height="315" src = "https://www.youtube.com/embed/ + {{ picData.picture }}" frameborder="0"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
   </ng-template>
 </div>

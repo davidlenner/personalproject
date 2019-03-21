@@ -37,11 +37,11 @@ public class ProjectService {
 
     public SpaceXData getSpaceX() {return spaceXRepo.findAll().get(0); }
 
-    public boolean checkUrl(Picture picture){
+    public String checkUrl(Picture picture){
         if (picture.getUrl().contains("youtube")) {
-            return true;
+            return "true";
         }else{
-            return false;
+            return "false";
         }
     }
 

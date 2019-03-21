@@ -1,5 +1,6 @@
-import {Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-picture',
@@ -9,15 +10,35 @@ import {HttpClient} from "@angular/common/http";
 export class PictureComponent implements OnInit {
 
   picData: Object;
+  picUrl: Config;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
-    this.getPics().subscribe(data => this.picData = data);
+    this.sendPicData();
   }
 
-  getPics() {
-    return this.http.get('/pic')
+  getPicsTitle() {
+    return this.http.get('http://localhost:60150/pictitle');
   }
+
+  sendPicData() {
+    this.getPicsTitle().subscribe(data => this.picData = data);
+    this.getPicUrl().subscribe(data => this.picUrl = {
+      url: data['url']
+    });
+  }
+
+  getPicUrl() {
+    return this.http.get('http://localhost:60150/pic');
+  }
+
+  photoURL() {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.picUrl.url);
+  }
+}
+
+export interface Config {
+  url: string;
 }

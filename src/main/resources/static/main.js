@@ -307,7 +307,7 @@ var JokeComponent = /** @class */ (function () {
         this.getJokes().subscribe(function (data) { return _this.jokes = data; });
     };
     JokeComponent.prototype.getJokes = function () {
-        return this.http.get('/joke');
+        return this.http.get('http://localhost:16150/joke');
     };
     JokeComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -409,7 +409,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-md-12\" *ngIf=\"!picData.type; else video\">\n    <strong>{{ picData.title }}</strong>\n    <img [src]=\"picData.picture\" [width]=\"800\" class=\"img-responsive\">\n  </div>\n  <ng-template #video>\n    <div class=\"col-md-12\" >\n      <strong>{{ picData.title }}</strong>\n      <iframe width=\"560\" height=\"315\" src = \"https://www.youtube.com/embed/ + {{ picData.picture }}\" frameborder=\"0\"\n              allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n    </div>\n  </ng-template>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"col-md-12\" *ngIf=\"picData.type == 'false',else video\">\n    <strong>{{ picData.title }}</strong>\n    <img src=\"{{ picUrl.url }}\" alt=\"{{picData.title}}\" [width]=\"800\" class=\"img-responsive\">\n  </div>\n  <ng-template #video>\n    <div class=\"col-md-12\" >\n      <iframe width=\"750\" height=\"500\" [src] = \"photoURL()\" frameborder=\"0\"\n              allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>\n      </iframe><br>\n      <strong>{{ picData.title }}</strong>\n    </div>\n  </ng-template>\n</div>\n"
 
 /***/ }),
 
@@ -425,6 +425,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PictureComponent", function() { return PictureComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -436,16 +437,30 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var PictureComponent = /** @class */ (function () {
-    function PictureComponent(http) {
+    function PictureComponent(http, sanitizer) {
         this.http = http;
+        this.sanitizer = sanitizer;
     }
     PictureComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.getPics().subscribe(function (data) { return _this.picData = data; });
+        this.sendPicData();
     };
-    PictureComponent.prototype.getPics = function () {
+    PictureComponent.prototype.getPicsTitle = function () {
+        return this.http.get('/pictitle');
+    };
+    PictureComponent.prototype.sendPicData = function () {
+        var _this = this;
+        this.getPicsTitle().subscribe(function (data) { return _this.picData = data; });
+        this.getPicUrl().subscribe(function (data) { return _this.picUrl = {
+            url: data['url']
+        }; });
+    };
+    PictureComponent.prototype.getPicUrl = function () {
         return this.http.get('/pic');
+    };
+    PictureComponent.prototype.photoURL = function () {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(this.picUrl.url);
     };
     PictureComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -453,7 +468,7 @@ var PictureComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./picture.component.html */ "./src/app/picture/picture.component.html"),
             styles: [__webpack_require__(/*! ./picture.component.css */ "./src/app/picture/picture.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["DomSanitizer"]])
     ], PictureComponent);
     return PictureComponent;
 }());
